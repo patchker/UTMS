@@ -4,16 +4,14 @@ import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 
-
+@Entity
 public class Scooter extends Vehicle{
     private int batteryLevel;
     private int batteryLifeLevel;
-    private int numOfRentals;
 
-
-    public Scooter(int id, String name, String type, String brand, String model, String driveType, int year, int numOfRentals, int batteryLifeLevel, int batteryLevel) {
-        super(id,name,type,brand,model,driveType,year);
-        this.numOfRentals = numOfRentals;
+//int id, String name, String type, String brand, String model, String driveType, int year, int batteryLifeLevel, int batteryLevel, int numOfRentals, int status, int ownerId
+    public Scooter(int id, String name, String type, String brand, String model, String driveType, int year, int batteryLifeLevel, int batteryLevel, int numOfRentals, int status, int ownerId) {
+        super(id, name, type, brand, model, driveType, year,batteryLifeLevel,batteryLevel, numOfRentals, status, ownerId);
         this.batteryLifeLevel = batteryLifeLevel;
         this.batteryLevel = batteryLevel;
     }
@@ -22,13 +20,6 @@ public class Scooter extends Vehicle{
 
     }
 
-    public int getNumOfRentals() {
-        return numOfRentals;
-    }
-
-    public void setNumOfRentals(int numOfRentals) {
-        this.numOfRentals = numOfRentals;
-    }
 
     public int getBatteryLifeLevel() {
         return batteryLifeLevel;
