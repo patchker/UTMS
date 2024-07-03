@@ -17,9 +17,7 @@ public class ScooterController {
     @PostMapping
     public Scooter createScooter(@RequestBody Scooter scooter) {
 
-        Scooter s1 = new Scooter(6, "test scooter", "scooter", "Lime", "LT_20", "electric", 222, 2, 100, 0, 1, 1);
-        scooterRepository.save(s1);
-        return s1;
+        return scooterRepository.save(scooter);
     }
 
     @GetMapping
@@ -27,3 +25,4 @@ public class ScooterController {
         return scooterRepository.findAll();
     }
 }
+

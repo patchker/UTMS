@@ -13,11 +13,6 @@ public class VehicleController {
     @Autowired
     private VehicleRepository vehicleRepository;
 
-    @PostMapping
-    public Vehicle createVehicle(@RequestBody Vehicle vehicle) {
-        return vehicleRepository.save(vehicle);
-    }
-
     @GetMapping
     public List<Vehicle> getAllVehicles() {
         return vehicleRepository.findAll();

@@ -5,6 +5,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 
 @Entity
+@DiscriminatorValue("SCOOTER")
 public class Scooter extends Vehicle{
     private int batteryLevel;
     private int batteryLifeLevel;

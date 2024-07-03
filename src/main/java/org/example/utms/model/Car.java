@@ -1,5 +1,11 @@
 package org.example.utms.model;
 
+
+import jakarta.persistence.DiscriminatorValue;
+import jakarta.persistence.Entity;
+
+@Entity
+@DiscriminatorValue("CAR")
 public class Car extends Vehicle{
     private int fuel;
 
@@ -14,6 +20,10 @@ public class Car extends Vehicle{
         super(id, name, type, brand, model, driveType, year,batteryLifeLevel,batteryLevel, numOfRentals, status, ownerId);
         this.fuel = fuel;
         this.maxFuel = maxFuel;
+    }
+
+    public Car() {
+
     }
 
     public int getFuel() {

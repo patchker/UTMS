@@ -10,7 +10,7 @@ public class UtmsApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(UtmsApplication.class, args);
 
-		User u1 = new User(2,"Marek","test","marek@gmail.com");
+		//User u1 = new User(2,"Marek","test","marek@gmail.com");
 
 
 
