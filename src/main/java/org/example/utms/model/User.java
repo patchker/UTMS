@@ -11,19 +11,19 @@ public class User {
     @SequenceGenerator(name = "user_sequence",sequenceName = "user_sequence",allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "user_sequence")
     private int id;
-    private String name;
+    private String username;
     private String password;
     private String email;
 
-    public User(int id, String name, String password, String email) {
+    public User(int id, String username, String password, String email) {
         this.id = id;
-        this.name = name;
+        this.username = username;
         this.password = password;
         this.email = email;
 
     }
-    public User(String name, String password, String email) {
-        this.name = name;
+    public User(String username, String password, String email) {
+        this.username = username;
         this.password = password;
         this.email = email;
     }
@@ -38,11 +38,11 @@ public class User {
 
 
     public String getName() {
-        return name;
+        return username;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setName(String username) {
+        this.username = username;
     }
 
     public int getId() {

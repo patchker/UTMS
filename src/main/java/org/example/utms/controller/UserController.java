@@ -16,44 +16,54 @@ import java.util.Map;
 @RequestMapping("/api/users")
 public class UserController {
 
-    @Autowired
-    private UserRepository userRepository;
-
+    private final UserRepository userRepository;
     private final UserService userService;
+
     @Autowired
-    public UserController(UserService userService) {
+    public UserController(UserRepository userRepository, UserService userService) {
+        this.userRepository = userRepository;
         this.userService = userService;
     }
+
+
     @PostMapping("/login")
     public ResponseEntity<String> login(@RequestBody Map<String, String> loginData) {
         String username = loginData.get("username");
         String password = loginData.get("password");
 
         if (username == null || password == null) {
-            return ResponseEntity.badRequest().body("Brak wymaganych danych logowania");
+            return ResponseEntity.badRequest().body("No login details required");
         }
 
         if (userService.login(username, password)) {
-            return ResponseEntity.ok("Zalogowano pomyślnie");
+            return ResponseEntity.ok("You have logged in successfully.");
         } else {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Nieprawidłowe dane logowania");
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid login details.");
         }
     }
     @PostMapping("/register")
     public ResponseEntity<String> registerUser(@RequestBody Map<String, String> registrationData) {
-        String name = registrationData.get("name");
+        String username = registrationData.get("username");
         String password = registrationData.get("password");
         String email = registrationData.get("email");
 
-        if (name == null || password == null || email == null) {
-            return ResponseEntity.badRequest().body("Brak wymaganych danych rejestracji");
+        if (username == null || password == null || email == null) {
+            return ResponseEntity.badRequest().body("No required registration details.");
+        }
+        if(userRepository.findByUsername(username) != null) {
+            System.out.println(userRepository.findByUsername(username));
+            return ResponseEntity.badRequest().body("A user with this name exists in the database.");
+
+        }
+        if(userRepository.findByEmail(email) != null) {
+            return ResponseEntity.badRequest().body("A user with this email address exists in the database.");
         }
 
         try {
-            User newUser = userService.registerUser(name, password, email);
-            return ResponseEntity.ok("Użytkownik zarejestrowany pomyślnie. ID: " + newUser.getId());
+            User newUser = userService.registerUser(username, password, email);
+            return ResponseEntity.ok("User registered successfully. ID: " + newUser.getId());
         } catch (Exception e) {
-            return ResponseEntity.badRequest().body("Błąd podczas rejestracji: " + e.getMessage());
+            return ResponseEntity.badRequest().body("Error during registration: " + e.getMessage());
         }
     }
     @GetMapping

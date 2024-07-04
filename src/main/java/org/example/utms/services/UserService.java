@@ -19,14 +19,14 @@ public class UserService {
     }
 
 
-    public User registerUser(String name, String password, String email) {
+    public User registerUser(String username, String password, String email) {
         String hashedPassword = passwordEncoder.encode(password);
-        User newUser = new User(name, hashedPassword, email);
+        User newUser = new User(username, hashedPassword, email);
         return userRepository.save(newUser);
     }
 
     public boolean login(String username, String password) {
-        User user = userRepository.findByName(username);
+        User user = userRepository.findByUsername(username);
         if (user != null) {
             return passwordEncoder.matches(password, user.getPassword());
         }
