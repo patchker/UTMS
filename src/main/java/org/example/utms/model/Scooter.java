@@ -10,7 +10,6 @@ public class Scooter extends Vehicle{
     private int batteryLevel;
     private int batteryLifeLevel;
 
-//int id, String name, String type, String brand, String model, String driveType, int year, int batteryLifeLevel, int batteryLevel, int numOfRentals, int status, int ownerId
     public Scooter(int id, String name, String type, String brand, String model, String driveType, int year, int batteryLifeLevel, int batteryLevel, int numOfRentals, int status, int ownerId) {
         super(id, name, type, brand, model, driveType, year,batteryLifeLevel,batteryLevel, numOfRentals, status, ownerId);
         this.batteryLifeLevel = batteryLifeLevel;

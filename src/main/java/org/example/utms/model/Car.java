@@ -8,7 +8,6 @@ import jakarta.persistence.Entity;
 @DiscriminatorValue("CAR")
 public class Car extends Vehicle{
     private int fuel;
-
     private int maxFuel;
 
     public Car(int fuel, int maxFuel) {

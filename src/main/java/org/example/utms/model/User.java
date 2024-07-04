@@ -1,6 +1,7 @@
 package org.example.utms.model;
 import jakarta.persistence.*;
 import org.springframework.context.annotation.Primary;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @Entity
 @Table(name = "users")
@@ -21,9 +22,18 @@ public class User {
         this.email = email;
 
     }
-
+    public User(String name, String password, String email) {
+        this.name = name;
+        this.password = password;
+        this.email = email;
+    }
     public User() {
 
+    }
+
+
+    public boolean checkPassword(String password) {
+        return this.password.equals(password);
     }
 
 
@@ -48,7 +58,8 @@ public class User {
     }
 
     public void setPassword(String password) {
-        this.password = password;
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        this.password = encoder.encode(password);
     }
 
     public String getEmail() {
